@@ -1,13 +1,22 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
+import { of } from 'rxjs';
+import {ajax} from 'rxjs/ajax'
+import {map, catchError, take} from 'rxjs/operators'
+
+const fetchAll = async () => {
+    const sub = ajax(`https://jsonplaceholder.typicode.com/todos`)
+    return new Promise((resolve, reject) => {
+        sub.pipe(
+            take(1)
+        ).subscribe(data => resolve(data.response), err => reject(err))
+    })
+}
 
 export const fetchTodos = createAsyncThunk(
     'user/todos',
     async () => {
-    console.log("fetching...")
-    const res = await fetch(`https://jsonplaceholder.typicode.com/todos`)
-    const data = await res.json()
-    console.log(data)
-    return data;
+    const res = await fetchAll();
+    return res
     }
 );
 

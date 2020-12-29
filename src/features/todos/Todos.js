@@ -9,16 +9,14 @@ const Todos = () => {
     const dispatch = useDispatch()
     const [todoText, setTodoText] = useState('')
 
-    useEffect(() => {
-        dispatch(fetchTodos())
-    },[])
+    
 
     return (
         <div className="todos">
             <h2>Todos</h2>
             <h4>Status: {JSON.stringify(todos.loading)}</h4>
             {
-               todos.error !== null ? <h2>Error...</h2> : todos.loading ? <h1>Loading...</h1> : todos.data.length ? todos.data.map(todo => (
+               todos.error !== null ? <h2>{JSON.stringify(todos.error)}</h2> : todos.loading ? <h1>Loading...</h1> : todos.data.length ? todos.data.map(todo => (
                     <div key={todo.id}>
                         <h2>{todo.title}</h2>
                         <button onClick={() => dispatch(removeTodo(todo.id))}>Remove</button>
