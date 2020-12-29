@@ -7,7 +7,7 @@ const fetchAll = async () => {
     const sub$ = ajax.getJSON(`https://jsonplaceholder.typicode.com/todos`)
     return new Promise((resolve, reject) => {
         sub$.pipe(
-            map(x => [...x, {id: 100000, title: '1000000. todo', completed:false, userId:100000}].filter(t => t.id > 100)),
+            map(x => [...x, {id: 1000000, title: '1000000. todo', completed:false, userId:100000}].filter(t => t.id > 100)),
             take(1),
         ).subscribe(data => resolve(data), err => reject(err))
     })
