@@ -4,7 +4,7 @@ import {ajax} from 'rxjs/ajax'
 import {map, catchError, take} from 'rxjs/operators'
 
 const fetchAll = async () => {
-    const sub$ = ajax.getJSON(`https://jsonplaceholder.typicode.com/todos`)
+    const sub$ = ajax.getJSON(`https://jsonplaceholder.typicode.com/tohdos`)
     return new Promise((resolve, reject) => {
         sub$.pipe(
             map(x => [...x, {id: 1000000, title: '1000000. todo', completed:false, userId:100000}].filter(t => t.id > 100)),
@@ -49,7 +49,7 @@ export const todosSlice  = createSlice({
         },
         [fetchTodos.rejected]: (state,action) => {
             state.loading = false;
-            state.error = action.payload
+            state.error = 'Could not get data'
         }
     }
 })
