@@ -9,6 +9,10 @@ const Todos = () => {
     const dispatch = useDispatch()
     const [todoText, setTodoText] = useState('')
 
+    useEffect(() => {
+        dispatch(fetchTodos())
+    },[])
+
     return (
         <div className="todos">
             <h2>Todos</h2>
