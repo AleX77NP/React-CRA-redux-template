@@ -17,6 +17,7 @@ const Todos = () => {
                todos.error !== null ? <h2>Error...</h2> : todos.loading ? <h1>Loading...</h1> : todos.data.length ? todos.data.map(todo => (
                     <div key={todo.id}>
                         <h2>{todo.title}</h2>
+                        <button onClick={() => dispatch(removeTodo(todo.id))}>Remove</button>
                     </div>
                 )) : <h3>No data...</h3>
             }
